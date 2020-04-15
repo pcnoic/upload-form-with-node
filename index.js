@@ -14,7 +14,8 @@ http.createServer(function (req, res) {
       var newpath = "/pets/upload-form-with-node/audio/ " + tag + "-" + Date.now() + ".wav";
       fs.rename(oldpath, newpath, function (err) {
         if (err) throw err;
-        res.write('File uploaded! Press <a href="http://devalexiou.com:8080">here </a> to upload more');
+        res.write('File uploaded!')
+        res.write('<a href="http://devalexiou.com:8080">Upload more</a>');
         res.end();
       });
  });
