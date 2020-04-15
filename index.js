@@ -10,7 +10,7 @@ http.createServer(function (req, res) {
     var form = new formidable.IncomingForm();
     form.parse(req, function (err, fields, files) {
       var oldpath = files.filetoupload.path;
-      var tag = files.tag.name; 
+      var tag = req.query.tag; 
       var newpath = "audio/" + tag;
       fs.rename(oldpath, newpath, function (err) {
         if (err) throw err;
