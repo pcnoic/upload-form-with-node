@@ -10,8 +10,8 @@ http.createServer(function (req, res) {
     var form = new formidable.IncomingForm();
     form.parse(req, function (err, fields, files) {
       var oldpath = files.filetoupload.path;
-      var tag = req.query.tag; 
-      var newpath = "audio/" + tag;
+      var tag = fields.tag; 
+      var newpath = "audio/" + tag + "-" + Date.now() + ".wav";
       fs.rename(oldpath, newpath, function (err) {
         if (err) throw err;
         res.write('File uploaded! Press <a href="http://devalexiou.com:8080">here </a> to upload more');
