@@ -10,10 +10,11 @@ http.createServer(function (req, res) {
     var form = new formidable.IncomingForm();
     form.parse(req, function (err, fields, files) {
       var oldpath = files.filetoupload.path;
-      var newpath = files.filetoupload.name;
+      var tag = files.tag.name; 
+      var newpath = "audio/" + tag;
       fs.rename(oldpath, newpath, function (err) {
         if (err) throw err;
-        res.write('File uploaded! Refresh to upload more!');
+        res.write('File uploaded! Press <a href="http://devalexiou.com:8080">here </a> to upload more');
         res.end();
       });
  });
@@ -21,6 +22,7 @@ http.createServer(function (req, res) {
     res.writeHead(200, {'Content-Type': 'text/html'});
     res.write('<form action="fileupload" method="post" enctype="multipart/form-data">');
     res.write('<input type="file" name="filetoupload"><br>');
+    res.write('<input type="text" name="tag"><br>')
     res.write('<input type="submit">');
     res.write('</form>');
     return res.end();
